@@ -14,14 +14,15 @@ Todo:
 
 
 base = 0;
-outer_box_width= 139.7;
-outer_box_depth = 114.3;
-box_height = 5;
+outer_box_width= 146;
+outer_box_depth = 108.56;
+box_height = 5.22;
 
+lipt_top = 7.63;
 lip_depth = 3;
-lip_side = 103;
+lip_side = 103.35;
 
-inner_box_side = 97.5;
+inner_box_side = 99.34;
 
 module roundedRect(size, radius)
 {
@@ -69,7 +70,7 @@ module frame() {
 
     
 module clawObject() {
-    claw_width=10;
+    claw_width=10.26;
     claw_depth = 5;
     claw_height=6;
     
