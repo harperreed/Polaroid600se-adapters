@@ -9,6 +9,8 @@ But first things first...
 
 ## Models
 
+**I am waiting for some higher quality proofs to be able to confirm that this interfaces well with teh 600se**
+
 there are a couple adapters I am attempting to model:
 
 * Generic Adapter (for use with anything). Glue it onto a CB70, or really anything. 
