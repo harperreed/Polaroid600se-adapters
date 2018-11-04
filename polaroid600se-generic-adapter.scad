@@ -1,6 +1,9 @@
 /*
 
-First try of a Polaroid 600 / Polaroid 600se Adapter
+Polaroid 600 / Polaroid 600se Adapter
+
+Refactor of first try
+
 
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 
@@ -13,74 +16,125 @@ Todo:
 */
 
 
+
 base = 0;
-outer_box_width= 146;
-outer_box_depth = 108.56;
-box_height = 5.22;
 
-lipt_top = 7.63;
-lip_depth = 3;
-lip_side = 103.35;
 
-inner_box_side = 99.34;
 
-module roundedRect(size, radius)
+
+
+module miniround(size, radius, center=false)
 {
-	x = size[0];
-	y = size[1];
-	z = size[2];
+$fn=50;
+x = size[0]-radius/2;
+y = size[1]-radius/2;
 
-	linear_extrude(height=z)
-	hull()
-	{
-		// place 4 circles in the corners, with the given radius
-		translate([(-x/2)+(radius/2), (-y/2)+(radius/2), 0])
-		circle(r=radius);
-	
-		translate([(x/2)-(radius/2), (-y/2)+(radius/2), 0])
-		circle(r=radius);
-	
-		translate([(-x/2)+(radius/2), (y/2)-(radius/2), 0])
-		circle(r=radius);
-	
-		translate([(x/2)-(radius/2), (y/2)-(radius/2), 0])
-		circle(r=radius);
-	}
+minkowski()
+{
+    cube(size=[x,y,size[2]], center=center);
+    cylinder(r=radius);
+    // Using a sphere is possible, but will kill performance
+    //sphere(r=radius);
+}
 }
 
+/* Seal to block the light */
+seal_outer = 102;
+seal_inner = 99.08;
+seal_height = 7.55;
+seal_wall_width = 2.11;
 
-module frame() {
+module seal() {
+    // set it at 0
+    translate([0,0,seal_height/2]){
     difference() {
-        union() {
-            outer_box = [outer_box_width,outer_box_depth,box_height];
-            cube(outer_box, center=true);
- 
-            translate([0,0,box_height-1]){
-                inner_box_lip = [lip_side,lip_side,lip_depth];
-                cube(inner_box_lip, center=true);
-            }
-        }
         
-        translate([0,0,2]){
-            inner_box = [inner_box_side,inner_box_side,11];
-            cube(inner_box, center=true);
-        }
+        seal_box = [seal_outer,seal_outer,seal_height];
+        //cube(seal_box, center=true);
+        miniround(seal_box, 3, center=true);
+        
+       // inside of the seal
+        inner_box = [seal_inner,seal_inner,seal_height];
+        miniround(inner_box, 1, center=true);
+        //cube(inner_box_lip, center=true);
+        
+    }
     }
 }
 
+/* Outer dimensions */
+
+outer_box_width= 146;
+outer_box_depth = 108.545;
+box_height = 5.22;
+
+
+module frame() {
+    // set it at 0
+    translate([0,0,box_height/2]){
+        difference() {
+            // base
+            outer_box = [outer_box_width,outer_box_depth,box_height];
+            cube(outer_box, center=true);
+ 
+            // cut out the inside
+            inner_box = [seal_inner+2,seal_inner+2,box_height];
+            cube(inner_box,  center=true);
+         }
+     }   
+}
+
+
+nub_depth = 34.19;
+nub_width = 5.76;
+nub_distance_from_seal = 2;
+nub_distance_from_edge = 13.95;
+nub_height_from_zero = 5.52;
+nub_height = nub_height_from_zero - box_height;
+
+
+
+module nub(nub_x, nub_y, nub_z) {
     
-module clawObject() {
-    claw_width=10.26;
-    claw_depth = 5;
-    claw_height=6;
+    translate([nub_x,nub_y,nub_z]){
+                nub = [nub_width,nub_depth,nub_height];
+                
+                    cube(nub,  center=true);
+                
+            }
+}
+
+
+module nubs() {
+    nub_position1 = (outer_box_width/2-nub_width/2 - nub_distance_from_edge);
+    nub_position2 = outer_box_depth/2-nub_depth/2;
     
-    difference() {
-        claw_coords = [claw_width,claw_depth,claw_height];
-        cube(claw_coords, center=true);
-        translate([0,-1.5,-1]){
-            color( "blue", 1.0 ){
-            claw = [claw_width,claw_depth-3,claw_height-2];
-            cube(claw, center=true);
+    nub(nub_position1, nub_position2*-1, box_height);
+    nub(nub_position1*-1, nub_position2, box_height);
+    nub(nub_position1*-1, nub_position2*-1, box_height);
+    nub(nub_position1, nub_position2, box_height);
+    
+}
+
+
+claw_width=10.11;
+claw_depth = 5;
+claw_height=5.92;
+give = 2;
+
+module claw(x,y,z, orientation) {
+    
+    translate([x,y,z]){
+        rotate(a=[0,0, orientation]) {
+            difference() {
+                claw_coords = [claw_width,claw_depth,claw_height+z-give ];
+                cube(claw_coords, center=true);
+                translate([0,-1.5,-.6]){
+                    
+                    claw = [claw_width,claw_depth-3,claw_height+z-give];
+                    cube(claw, center=true);
+                    
+                }
             }
         }
     }
@@ -89,78 +143,58 @@ module clawObject() {
 
 module claws() {
  
-    claw_x = outer_box_width/2-12;
+    claw_x = outer_box_width/2-11.5;
     claw_y = 8 ; 
 
-     translate([claw_x,claw_y,6]){
-            rotate(a=[0,0,-90]) {
-                clawObject();
-            }
-        }
-     translate([claw_x,-claw_y,6]){
-            rotate(a=[0,0,-90]) {
-                clawObject();
-            }
-        }
-      translate([-claw_x,claw_y,6]){
-            rotate(a=[0,0,90]) {
-                clawObject();
-            }
-        }
-     translate([-claw_x,-claw_y,6]){
-            rotate(a=[0,0,90]) {
-                clawObject();
-            }
-        }
+    claw(claw_x, -claw_y, box_height, -90);
+    claw(claw_x, claw_y, box_height, -90);
+    claw(-claw_x, -claw_y, box_height, 90);
+    claw(-claw_x, claw_y, box_height, 90);
 }
 
 
-module nub() {
+module adapter() {
+
+    union() {
+        color( "green", 1.0 ){
+            seal();
+        }
+        color( "blue", 1.0 ){
+            frame();
+        }
+        color( "red", 1.0 ){
+            nubs();
+        }
+        
+        color( "yellow", 1.0 ){
+            claws();
+        }
+        
+    }
+}
+
+/* Debug seal */
+
+module debug_corner() {
+
+    difference() {
     
-    nub_height = box_height;
-    nub_width = 4;
-    nub_depth = 34;
-    nub = [nub_width,nub_depth,nub_height];
-    roundedRect(nub, 1);
+        adapter();
+            
+        /* block out the rest */
+        translate([00,75,10]){
+            cube([150,150,20], center=true);
+        }
+        
+        translate([50,00,10]){
+            cube([150,150,20], center=true);
+        }
     
-}
-
-module nubs() {
-    claw_x = outer_box_width/2-14;
-    claw_y = outer_box_depth/2-18 ; 
-    rotate(0,0,180){
-        translate([claw_x,claw_y,-1.99]){
-            nub();
-        }
-    }
-    rotate(0,0,180){
-        translate([claw_x,-claw_y,-1.99]){
-            nub();
-        }
-    }
-    rotate(0,0,180){
-        translate([-claw_x,claw_y,-1.99]){
-            nub();
-        }
-    }
-    rotate(0,0,180){
-        translate([-claw_x,-claw_y,-1.99]){
-            nub();
-        }
-    }
-}
-
-nubs();
-/* body */
     
-
-translate([0,0,0]){
-  frame();
-  claws();
+    }
 }
 
 
- 
- 
+adapter();
 
-echo(version=version());
+//debug_corner();
