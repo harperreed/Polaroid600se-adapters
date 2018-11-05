@@ -46,6 +46,4 @@ module adapter() {
 
 
 
-adapter();
-
-//debug_corner();
+adapter(); // Let's get that adapter going!
