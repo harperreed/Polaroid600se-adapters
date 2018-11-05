@@ -12,6 +12,9 @@ Light seal
 
 Seal to block the light
 
+The light seal fits into the groove on the 600SE to block light once the back is installed. 
+
+
 */
 
 

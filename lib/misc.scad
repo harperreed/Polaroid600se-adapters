@@ -11,6 +11,8 @@ https://creativecommons.org/licenses/by-nc-sa/3.0/
 Various parts
 
 
+The nubs are stupid
+
 
 */
 
@@ -28,11 +30,11 @@ nub_height = nub_height_from_zero - box_height;
 module nub(nub_x, nub_y, nub_z) {
     
     translate([nub_x,nub_y,nub_z]){
-                nub = [nub_width,nub_depth,nub_height];
+        nub = [nub_width,nub_depth,nub_height];
                 
-                    cube(nub,  center=true);
+        cube(nub,  center=true);
                 
-            }
+    }
 }
 
 
