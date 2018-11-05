@@ -14,6 +14,17 @@ Various parts
 
 */
 
+/* Nub dimensions [-------------------------------------------------------------- */
+
+nub_depth = 34.19;
+nub_width = 5.76;
+nub_distance_from_seal = 2;
+nub_distance_from_edge = 13.95;
+nub_height_from_zero = 5.52;
+nub_height = nub_height_from_zero - box_height;
+
+/* Nub modules [-------------------------------------------------------------- */
+
 module nub(nub_x, nub_y, nub_z) {
     
     translate([nub_x,nub_y,nub_z]){

@@ -15,10 +15,15 @@ Claws to hook into the camera body
 */
 
 
+/* Claw dimensions [-------------------------------------------------------------- */
+
 claw_width=10.11;
 claw_depth = 5;
 claw_height=5.92;
 give = 2;
+
+
+/* Claw modules [-------------------------------------------------------------- */
 
 module claw(x,y,z, orientation) {
     

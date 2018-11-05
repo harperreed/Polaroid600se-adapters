@@ -15,12 +15,13 @@ Back Base
 */
 
 
-/* Outer dimensions */
+/* Base dimensions [-------------------------------------------------------------- */
 
 outer_box_width= 146;
 outer_box_depth = 108.545;
 box_height = 5.22;
 
+/* Base module [-------------------------------------------------------------- */
 
 module base() {
     // set it at 0
@@ -37,10 +38,3 @@ module base() {
      }   
 }
 
-
-nub_depth = 34.19;
-nub_width = 5.76;
-nub_distance_from_seal = 2;
-nub_distance_from_edge = 13.95;
-nub_height_from_zero = 5.52;
-nub_height = nub_height_from_zero - box_height;
