@@ -33,9 +33,6 @@ claw_distance_from_seal = 5.23;
 claw_distance_from_side = 41.90;
 claw_distance_from_otherside = 56.00;
 
-echo(outer_box_depth/2 - claw_distance_from_side);
-echo(outer_box_depth/2 - claw_distance_from_otherside);
-
 claw_y = 8; // I wish i could derive this. but here we are. 
 //used to be (outer_box_depth/2 - claw_distance_from_side) + (outer_box_depth/2 - claw_distance_from_otherside);
 //echo(claw_y);
