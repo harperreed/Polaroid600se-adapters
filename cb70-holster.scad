@@ -34,6 +34,8 @@ rotate([0,180,0]) {
         }
         claws();
         
+ 
+        
     }
     }
 }
@@ -50,7 +52,7 @@ module cb70_body() {
 
 
 
-cb70_notch_height = 8;
+cb70_notch_height = 15;
 cb70_notch_depth = 54;
 cb70_notch_width = 13; // at widest point
 
@@ -58,7 +60,7 @@ module cb70_notch() {
     
     x = cb70_width/2+cb70_notch_width/2;
     y = cb70_notch_depth-24;
-    z = 5;
+    z = -5;
     
     translate([x,y,z]){
         cube ([cb70_notch_width, cb70_notch_depth, cb70_notch_height], center=true);
