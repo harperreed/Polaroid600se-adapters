@@ -102,7 +102,7 @@ module holster() {
 
 
 
-
+rotate([90]){
 union () {
 
     difference(){
@@ -113,5 +113,5 @@ union () {
     adapter();
 
 }
-
+}
 //debug_corner();
