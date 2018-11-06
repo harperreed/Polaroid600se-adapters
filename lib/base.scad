@@ -22,6 +22,8 @@ outer_box_width= 146;
 outer_box_depth = 108.545;
 box_height = 5.22;
 
+base_small_difference = 17;
+
 /* Base module [-------------------------------------------------------------- */
 
 // Base abstraction
@@ -45,6 +47,12 @@ module base_obj(x,y,z,seal_width) {
 module default_base() {
     base_obj(outer_box_width,outer_box_depth,box_height,seal_inner+2);
 }
+
+//default base
+module small_base() {
+    base_obj(outer_box_width-base_small_difference,outer_box_depth,box_height,seal_inner+2);
+}
+
 
 
 
