@@ -20,7 +20,7 @@ include <lib/functions.scad>
 include <lib/base.scad> // Back base
 include <lib/seal.scad> // Light seal
 include <lib/claws.scad>  // Claws
-//include <lib/misc.scad> // misc parts
+include <lib/misc.scad> // misc parts
 
 
 module adapter() {
@@ -30,7 +30,7 @@ module adapter() {
             seal();
         }
         color( "blue", 1.0 ){
-            base();
+            default_base();
         }
         color( "red", 1.0 ){
             nubs();

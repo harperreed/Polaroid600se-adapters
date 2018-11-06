@@ -24,18 +24,27 @@ box_height = 5.22;
 
 /* Base module [-------------------------------------------------------------- */
 
-module base() {
+// Base abstraction
+module base_obj(x,y,z,seal_width) {
     // set it at 0
-    translate([0,0,box_height/2]){
+    translate([0,0,z/2]){
         difference() {
             // base
-            outer_box = [outer_box_width,outer_box_depth,box_height];
+            outer_box = [x,y,z];
             cube(outer_box, center=true);
  
             // cut out the inside
-            inner_box = [seal_inner+2,seal_inner+2,box_height];
+            inner_box = [seal_width,seal_width,z];
             cube(inner_box,  center=true);
          }
      }   
 }
+
+
+//default base
+module default_base() {
+    base_obj(outer_box_width,outer_box_depth,box_height,seal_inner+2);
+}
+
+
 
