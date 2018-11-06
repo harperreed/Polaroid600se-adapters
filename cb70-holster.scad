@@ -102,16 +102,16 @@ module holster() {
 
 
 
-rotate([90]){
-union () {
+rotate([90]){ // let's make it printable ;)
+    union () {
 
-    difference(){
+        difference(){
         
-        holster();
-        cb70(); 
-    }
-    adapter();
+            holster();
+            cb70(); 
+        }
+        adapter();
 
-}
+    }
 }
 //debug_corner();
