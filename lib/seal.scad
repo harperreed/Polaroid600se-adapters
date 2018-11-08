@@ -22,8 +22,8 @@ The light seal fits into the groove on the 600SE to block light once the back is
 /* Seal dimensions [-------------------------------------------------------------- */
 
 
-seal_outer = 101;
-seal_inner = 99.5;
+seal_outer = 99.5;
+seal_inner = 98;
 seal_height = 7.55;
 seal_wall_width = 2.11;
 

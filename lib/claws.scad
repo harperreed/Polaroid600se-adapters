@@ -33,7 +33,7 @@ claw_distance_from_seal = 5.23;
 claw_distance_from_side = 41.90;
 claw_distance_from_otherside = 56.00;
 
-claw_y = 8; // I wish i could derive this. but here we are. 
+claw_y = 7; // I wish i could derive this. but here we are. 
 //used to be (outer_box_depth/2 - claw_distance_from_side) + (outer_box_depth/2 - claw_distance_from_otherside);
 //echo(claw_y);
 
@@ -98,7 +98,8 @@ module claw_old(x,y,z, orientation) {
 
 module claws() {
  
-    claw_x = outer_box_width/2-11.5;
+    claw_x = (outer_box_width/2)-12.5;
+    
     //claw_y = 11 ; 
     height = claw_height/2 + box_height;
 
