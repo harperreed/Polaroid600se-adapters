@@ -23,13 +23,13 @@ The claws hook into the body via the locking / unlocking mechanism on the 600se.
 
 /* Claw dimensions [-------------------------------------------------------------- */
 
-claw_height_from_zero = 11.02;
+claw_height_from_zero = 12.02;
 
 claw_width = 6.11; // measured at 5.11
 claw_depth = 10.17;
 claw_height= claw_height_from_zero-box_height;
 
-claw_distance_from_seal = 5.23;
+claw_distance_from_seal = 2; //5.23;
 claw_distance_from_side = 41.90;
 claw_distance_from_otherside = 56.00;
 
@@ -55,7 +55,6 @@ module claw(x,y,z, orientation) {
         difference() {
             claw = [claw_width,claw_depth,claw_height];
             cube(claw, center=true);
-
             color( "red", 1.0 ){
                 translate([claw_leg_width/2,0,-.8]){
                     inside_claw = [claw_inside_width, claw_depth+3, claw_inside_height];
@@ -65,7 +64,6 @@ module claw(x,y,z, orientation) {
         } 
         }
     }
-
 }
 
 module dumb_claw(x,y,z, orientation) {
@@ -73,22 +71,18 @@ module dumb_claw(x,y,z, orientation) {
             claw = [claw_width,claw_depth,claw_height];
             cube(claw, center=true);
     }
-
 }
 
 
 module claw_old(x,y,z, orientation) {
-    
     translate([x,y,z]){
         rotate(a=[0,0, orientation]) {
             difference() {
                 claw_coords = [claw_width,claw_depth,claw_height+z-give ];
                 cube(claw_coords, center=true);
                 translate([0,-1.5,-.6]){
-                    
                     claw = [claw_width,claw_depth-3,claw_height+z-give];
-                    cube(claw, center=true);
-                    
+                    cube(claw, center=true);               
                 }
             }
         }
@@ -98,7 +92,7 @@ module claw_old(x,y,z, orientation) {
 
 module claws() {
  
-    claw_x = (outer_box_width/2)-12.5;
+    claw_x = (outer_box_width/2)-14; //moved two mm towards the middle
     
     //claw_y = 11 ; 
     height = claw_height/2 + box_height;
