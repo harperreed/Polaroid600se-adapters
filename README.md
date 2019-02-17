@@ -9,6 +9,8 @@ The ultimate goal is to hack an instax wide camera into a working instax wide ba
 * `generic-adapter.stl` - Generic Adapter (for use with anything). Glue it onto a CB70, or really anything. [download](https://github.com/harperreed/Polaroid600se-adapters/releases/download/0.1/generic-adapter.stl)
 * `cb70-adapter.stl` - A CB70 Adapter (A better adapter for a CB70 that doesn't require glue or whatever) [download](https://github.com/harperreed/Polaroid600se-adapters/releases/download/0.1/cb70-adapter.stl)
 
+You can find the [models on thingiverse](https://www.thingiverse.com/groups/polaroid-600/things) or download them here
+
 The models were created using [OpenSCAD](http://www.openscad.org/). You can play around with them by downloading OpenSCAD and opening the .scad files. OpenSCAD will generate an STL that you can print. 
 
 ## Printing
