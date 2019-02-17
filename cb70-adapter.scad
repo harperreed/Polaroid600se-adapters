@@ -24,23 +24,28 @@ include <lib/misc.scad> // misc parts
 
 
 module adapter() {
+    difference() {
 
-    union() {
-        color( "green", 1.0 ){
-            seal();
-        }
-        color( "blue", 1.0 ){
-            cb70_base();
-        }
-        color( "red", 1.0 ){
-            //nubs();
-        }
-        
-        color( "yellow", 1.0 ){
-            claws();
-        }
-        
+    
+      union() {
+          color( "green", 1.0 ){
+              seal();
+          }
+          color( "blue", 1.0 ){
+              cb70_base();
+          }
+          color( "red", 1.0 ){
+              nubs();
+          }
+          
+          color( "yellow", 1.0 ){
+              claws();
+          }
+          
+      }
+
     }
+
 }
 
 
