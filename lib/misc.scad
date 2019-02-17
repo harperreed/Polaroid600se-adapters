@@ -49,3 +49,47 @@ module nubs() {
     
 }
 
+/* screw holes for cb70 [-------------------------------------------------------------- */
+
+
+/* screw hole dimensions [-------------------------------------------------------------- */
+
+
+screw_diameter = 3;
+screw_hole_height = 20;
+
+/* Screw hole modules [-------------------------------------------------------------- */
+
+module screw_hole(screw_x, screw_y, screw_z, height, diameter) {
+    
+    radius = diameter/2;
+
+    translate([screw_x, screw_y, screw_z]){
+        cylinder(h=height, r=radius, center=true);
+    }
+   
+   
+}
+
+
+module screw_holes() {
+    //30 from top
+    top_screw_position_x = 50;
+    top_screw_position_y = -27;
+    top_screw_position_z = -0;
+
+    screw_hole(top_screw_position_x,top_screw_position_y,top_screw_position_z,screw_hole_height,screw_diameter);
+    screw_hole(-top_screw_position_x,top_screw_position_y,top_screw_position_z,screw_hole_height,screw_diameter);
+
+    //17ish from bottom
+
+    bottom_screw_position_x = 50;
+    bottom_screw_position_y = 35;
+    bottom_screw_position_z = -0;
+    
+    screw_hole(bottom_screw_position_x,bottom_screw_position_y,bottom_screw_position_z,screw_hole_height,screw_diameter);
+    screw_hole(-bottom_screw_position_x,bottom_screw_position_y,bottom_screw_position_z,screw_hole_height,screw_diameter);
+    
+
+   
+}

@@ -15,6 +15,8 @@ This is the generic base. I don't know why it is this big.
 
 */
 
+include <../lib/misc.scad> // misc parts
+
 
 /* Base dimensions [-------------------------------------------------------------- */
 
@@ -73,7 +75,7 @@ module cb70_base() {
     inner_box_z = base_z + 4;
     inner_offset_y = 8;
 
-    bottom_spacer = 6;
+    bottom_spacer = 8;
     bottom_offset_y = base_y/2+2; //attach the spacer here
 
     translate([0,0,base_z/2]){
@@ -86,13 +88,18 @@ module cb70_base() {
             translate([0,inner_offset_y,0]){
                 cube(inner_box,  center=true);
             }
+            
+
+            
         }
         
         translate([0,bottom_offset_y,0]){
             bottom_cb_70_base = [base_x,bottom_spacer,base_z];
             cube(bottom_cb_70_base, center=true);
         }
-     }
+        
+    }
+    
  
 }
 

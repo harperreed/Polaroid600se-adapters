@@ -66,6 +66,23 @@ module claw(x,y,z, orientation) {
     }
 }
 
+module claw_wall(x,y,z, orientation) {
+    translate([x,y,z]){
+        rotate(a=[0,0, orientation]) {
+        difference() {
+            claw = [claw_width,claw_depth,claw_height];
+            cube(claw, center=true);
+            color( "red", 1.0 ){
+                translate([claw_leg_width/2,0,-.8]){
+                    inside_claw = [claw_inside_width, claw_depth+3, claw_inside_height+10];
+                    cube(inside_claw, center=true);
+                }
+            }
+        } 
+        }
+    }
+}
+
 module dumb_claw(x,y,z, orientation) {
     translate([x,y,z]){
             claw = [claw_width,claw_depth,claw_height];
@@ -90,8 +107,7 @@ module claw_old(x,y,z, orientation) {
 }
 
 
-module claws() {
- 
+module claws_traditional(){
     claw_x = (outer_box_width/2)-14; //moved two mm towards the middle
     
     //claw_y = 11 ; 
@@ -103,4 +119,31 @@ module claws() {
 
     dumb_claw(-claw_x, claw_y, height, 0);
     dumb_claw(claw_x, claw_y, height, 0);
+
+}
+
+
+module claws_strong() {
+    claw_x = (outer_box_width/2)-14; //moved two mm towards the middle
+    
+    //claw_y = 11 ; 
+    height = claw_height/2 + box_height;
+
+    claw(claw_x, -claw_y, height, -180);
+    
+    claw(-claw_x, -claw_y, height, 0);
+
+    claw_wall(claw_x, -claw_y+10, height, -180);
+    
+    claw_wall(-claw_x, -claw_y+10, height, 0);
+
+    dumb_claw(-claw_x, claw_y, height, 0);
+    dumb_claw(claw_x, claw_y, height, 0);
+   
+}
+
+
+module claws() {
+    claws_strong();
+   
 }
